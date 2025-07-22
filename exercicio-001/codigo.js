@@ -41,5 +41,5 @@ function resultado() {
     return
   }
 
-  resposta.innerHTML = `Seu peso é ${peso}KG e idade ${idade} anos.`
+  resposta.innerHTML = `<p>Seu peso é ${peso}KG e idade ${idade} ano(s).</p>`
 }
