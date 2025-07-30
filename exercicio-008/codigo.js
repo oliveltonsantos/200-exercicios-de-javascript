@@ -1,8 +1,8 @@
- /* Descrição do exercício:
+/* Descrição do exercício:
 
 Declare uma variável e atribua um valor numérico a ela. Use o operador de incremento para aumentar o valor da variável. Imprima o resultado.
 
- */
+*/
 
 const inputInicio = document.getElementById('inicio')
 const inputFinal = document.getElementById('final')
@@ -12,7 +12,7 @@ const btnNovaContagem = document.querySelector('button.btnNovaContagem')
 const resposta = document.querySelector('div.resposta')
 
 function contagem() {
-    const inicioDigitado = inputInicio.value 
+    const inicioDigitado = inputInicio.value
     const inicio = Number(inicioDigitado)
 
     if (inicioDigitado === '') {
@@ -60,12 +60,37 @@ function contagem() {
         return
     }
 
-    for (let contador = inicio; contador <= final; contador += passos) {
-        resposta.innerHTML += `${contador} > `
+    if (inicio < final) {
+        // Contagem dos números crescente
+        for (let contador = inicio; contador <= final; contador += passos) {
+            resposta.innerHTML += `${contador} > `
+        }
+    } else {
+        // Contagem dos números decrescente
+        for (let contador = inicio; contador >= final; contador -= passos) {
+            resposta.innerHTML += `${contador} > `
+        }
     }
 
     resposta.innerHTML += 'ACABOU!'
 
+    btnContagem.style.display = 'none'
+    btnNovaContagem.style.display = 'inline-block'
+
 }
+
+function novaContagem() {
+    inputInicio.value = ''
+    inputFinal.value = ''
+    inputPassos.value = ''
+    inputInicio.focus()
+
+    btnContagem.style.display = 'inline-block'
+    btnNovaContagem.style.display = 'none'
+
+    resposta.innerHTML = ''
+
+}
+
 
 
