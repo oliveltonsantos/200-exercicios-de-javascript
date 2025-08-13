@@ -6,7 +6,6 @@ Descrição: Neste exercício, você vai simular um jogo onde o usuário "pensa"
 
 */
 
-
 const inputNumero = document.getElementById('numero')
 const btnAdivinhar = document.querySelector('button.btnAdivinhar')
 const btnNovoNumero = document.querySelector('button.btnNovoNumero')
@@ -44,6 +43,8 @@ function adivinharNumero() {
         resposta.innerHTML += `<p>${numeroEscolhido} não foi encontrado.</p>`
     }
 
+    btnAdivinhar.style.display = 'none'
+    btnNovoNumero.style.display = 'inline-block'
 }
 
 function buscaBinaria(lista, numero) {
@@ -68,3 +69,12 @@ function buscaBinaria(lista, numero) {
 
 }
 
+function novoNumero() {
+    inputNumero.value = ''
+    inputNumero.focus()
+
+    btnAdivinhar.style.display = 'inline-block'
+    btnNovoNumero.style.display = 'none'
+
+    resposta.innerHTML = ''
+}
