@@ -1,4 +1,4 @@
- /* Descrição do exercício:
+/* Descrição do exercício:
 
 Usando um laço for, crie um programa que transforme um número binário em decimal. 
 
@@ -6,7 +6,7 @@ Descrição: Neste exercício, você deve criar um programa que converte um núm
 
 Por exemplo, o número binário 1010 convertido em decimal é 10.
 
- */
+*/
 
 const inputNumero = document.getElementById('numero')
 const btnBinario = document.querySelector('button.btnBinario')
@@ -22,7 +22,10 @@ function conversaoBinario() {
     }
 
     let binario = inputNumero.value
+
+    // O método "split" quebra uma string em partes e transformar essas partes em um array
     let arrayBinario = binario.split('')
+
     let totalAnterior = 0
 
     for (let contador = 0; contador < arrayBinario.length; contador++) {
