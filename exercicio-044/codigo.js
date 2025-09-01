@@ -18,10 +18,14 @@ const resposta = document.querySelector('div.resposta')
 
 // Matriz com escopo global
 let matrizA = []
+let matrixB = []
+
+
 let linhas = 0
 let colunas = 0
 let posicaoI = 0 // Linha atual
 let posicaoJ = 0 // Coluna atual
+let preenchendoMatriz = 'A' // Controle de qual matriz está sendo preenchida
 
 
 function quantidadeLinhasColunas() {
@@ -46,9 +50,10 @@ function quantidadeLinhasColunas() {
     linhas = Number(inputLinhas.value)
     colunas = Number(inputColunas.value)
 
-    // Inicializa a matriz vazia
+    // Inicializa a matriz A e matriz B vazias
     for (let i = 0; i < linhas; i++) {
         matrizA[i] = []
+        matrixB[i] = []
     }
 
     // Esconde os elementos da primeira tela
@@ -63,6 +68,7 @@ function quantidadeLinhasColunas() {
 
 }
 
+
 function adicionarValor() {
     if (inputValor.value === '') {
         alert('Digite um valor para adicionar à matriz.')
@@ -70,35 +76,42 @@ function adicionarValor() {
         return
     }
 
-    // Adiciona o valor atual na matriz
-    matrizA[posicaoI][posicaoJ] = Number(inputValor.value)
+    let valor = Number(inputValor.value)
+
+    // Adiciona o valor na matriz A e depois matriz B
+    if (preenchendoMatriz === 'A') {
+        matrizA[posicaoI][posicaoJ] = valor
+    } else {
+        matrixB[posicaoI][posicaoJ] = valor
+    }
 
     posicaoJ++ // Avança para a próxima coluna
 
-    if (posicaoJ > colunas) {
+    if (posicaoJ >= colunas) {
         posicaoJ = 0
         posicaoI++
     }
 
     if (posicaoI >= linhas) {
-        resposta.innerHTML = `<pre>${JSON.stringify(matrizA, null, 2)}</pre>`
-        alert("Matriz preenchida!")
+        if (preenchendoMatriz === 'A') {
+            alert('Matriz A foi preenchida! Agora preencha a matriz B.')
+
+            // Reseta as posições e troca para Matriz B
+            posicaoI = 0
+            posicaoJ = 0
+            preenchendoMatriz = 'B'
+
+        } else {
+            alert('Matriz B preenchida!')
+            resposta.innerHTML = 'CERTO'
+        }
     }
 
     // limpa input
     inputValor.value = ''
     inputValor.focus()
 
-
-
-
-
-
-
-
-   
 }
-
 
 
 
