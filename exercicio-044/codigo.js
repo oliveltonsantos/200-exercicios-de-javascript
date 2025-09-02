@@ -15,6 +15,8 @@ const tela1 = document.querySelectorAll('.tela1')
 const tela2 = document.querySelectorAll('.tela2')
 const inputValor = document.getElementById('valor')
 const resposta = document.querySelector('div.resposta')
+const btnAdicionarValor = document.querySelector('button.btnAdicionarValor')
+const btnNovaSoma = document.querySelector('button.btnNovaSoma')
 
 // Matriz com escopo global
 let matrizA = []
@@ -38,12 +40,6 @@ function quantidadeLinhasColunas() {
     if (inputColunas.value === '') {
         alert('Digite a quantidade de colunas para continuar.')
         inputColunas.focus()
-        return
-    }
-
-    if (inputLinhas.value !== inputColunas.value) {
-        alert('Para somar valores em uma matriz é necessário que o número de linhas e colunas sejam iguais.')
-        inputLinhas.focus()
         return
     }
 
@@ -103,16 +99,45 @@ function adicionarValor() {
 
         } else {
             alert('Matriz B preenchida!')
-            resposta.innerHTML = 'CERTO'
+
+            // Matriz guarda os valores da Matriz A e B
+            let somaMatrizes = []
+
+            // Pecorre as linhas da matriz "somaMatrizes"
+            for (let i = 0; i < linhas; i++) {
+                somaMatrizes[i] = [] // Cria uma linha vazia dentro da matriz
+
+                // Pecorre as colunas da  matriz "somaMatrizes"
+                for (let j = 0; j < colunas; j++) {
+                    // Soma posição por posição da matriz A e B
+                    somaMatrizes[i][j] = matrizA[i][j] + matrixB[i][j]
+                }
+            }
+
+            // Exibição da resposta
+            let texto = ''
+
+            for (let i = 0; i < linhas; i++) {
+                texto += somaMatrizes[i].join(' ') + '<br>'
+            }
+
+            resposta.innerHTML = `<p>Soma das matrizes A e B: <br><br>${texto}</p>`
+
+            btnNovaSoma.style.display = 'inline-block'
+            btnAdicionarValor.style.display = 'none'
+            inputValor.disabled = true
         }
     }
 
-    // limpa input
+    // Limpa input
     inputValor.value = ''
     inputValor.focus()
 
 }
 
+function novaSoma() {
+    
+}
 
 
 
