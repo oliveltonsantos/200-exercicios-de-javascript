@@ -15,13 +15,11 @@ const tela1 = document.querySelectorAll('.tela1')
 const tela2 = document.querySelectorAll('.tela2')
 const inputValor = document.getElementById('valor')
 const resposta = document.querySelector('div.resposta')
-const btnAdicionarValor = document.querySelector('button.btnAdicionarValor')
 const btnNovaSoma = document.querySelector('button.btnNovaSoma')
 
 // Matriz com escopo global
 let matrizA = []
-let matrixB = []
-
+let matrizB = []
 
 let linhas = 0
 let colunas = 0
@@ -49,7 +47,7 @@ function quantidadeLinhasColunas() {
     // Inicializa a matriz A e matriz B vazias
     for (let i = 0; i < linhas; i++) {
         matrizA[i] = []
-        matrixB[i] = []
+        matrizB[i] = []
     }
 
     // Esconde os elementos da primeira tela
@@ -78,7 +76,7 @@ function adicionarValor() {
     if (preenchendoMatriz === 'A') {
         matrizA[posicaoI][posicaoJ] = valor
     } else {
-        matrixB[posicaoI][posicaoJ] = valor
+        matrizB[posicaoI][posicaoJ] = valor
     }
 
     posicaoJ++ // Avança para a próxima coluna
@@ -110,9 +108,14 @@ function adicionarValor() {
                 // Pecorre as colunas da  matriz "somaMatrizes"
                 for (let j = 0; j < colunas; j++) {
                     // Soma posição por posição da matriz A e B
-                    somaMatrizes[i][j] = matrizA[i][j] + matrixB[i][j]
+                    somaMatrizes[i][j] = matrizA[i][j] + matrizB[i][j]
                 }
             }
+
+            // Esconde os elementos da segunda tela
+            tela2.forEach(parteDaTela2 => {
+                parteDaTela2.style.display = 'none'
+            })
 
             // Exibição da resposta
             let texto = ''
@@ -124,8 +127,7 @@ function adicionarValor() {
             resposta.innerHTML = `<p>Soma das matrizes A e B: <br><br>${texto}</p>`
 
             btnNovaSoma.style.display = 'inline-block'
-            btnAdicionarValor.style.display = 'none'
-            inputValor.disabled = true
+
         }
     }
 
@@ -136,7 +138,36 @@ function adicionarValor() {
 }
 
 function novaSoma() {
-    
+
+    resposta.innerHTML = ''
+
+    btnNovaSoma.style.display = 'none'
+
+    // Mostra os elementos da primeira tela
+    tela1.forEach(parteDaTela1 => {
+        parteDaTela1.style.display = 'inline-block'
+    })
+
+
+    // Esconde os elementos da segunda tela
+    tela2.forEach(parteDaTela2 => {
+        parteDaTela2.style.display = 'none'
+    })
+
+    inputLinhas.value = ''
+    inputColunas.value = ''
+    inputLinhas.focus()
+
+    // Reseta a matriz com escopo global
+    matrizA = []
+    matrizB = []
+
+    linhas = 0
+    colunas = 0
+    posicaoI = 0 // Linha atual
+    posicaoJ = 0 // Coluna atual
+    preenchendoMatriz = 'A' // Controle de qual matriz está sendo preenchida
+
 }
 
 
