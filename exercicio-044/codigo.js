@@ -33,9 +33,7 @@ function quantidadeLinhasColunas() {
         alert('Digite a quantidade de linhas para continuar.')
         inputLinhas.focus()
         return
-    }
-
-    if (inputColunas.value === '') {
+    } else if (inputColunas.value === '') {
         alert('Digite a quantidade de colunas para continuar.')
         inputColunas.focus()
         return
@@ -43,6 +41,18 @@ function quantidadeLinhasColunas() {
 
     linhas = Number(inputLinhas.value)
     colunas = Number(inputColunas.value)
+
+    if (linhas <= 0) {
+        alert('O número de linhas deve ser maior que zero.')
+        inputLinhas.value = ''
+        inputLinhas.focus()
+        return
+    } else if (colunas <= 0) {
+        alert('O número de colunas deve ser maior que zero.')
+        inputColunas.value = ''
+        inputColunas.focus()
+        return
+    }
 
     // Inicializa a matriz A e matriz B vazias
     for (let i = 0; i < linhas; i++) {
@@ -101,6 +111,26 @@ function adicionarValor() {
             // Matriz guarda os valores da Matriz A e B
             let somaMatrizes = []
 
+            let i = 0
+
+            do {
+                let j = 0
+                somaMatrizes[i] = [] // Cria uma linha vazia dentro da matriz
+
+                do {
+                    // Soma posição por posição da matriz A e B
+                    somaMatrizes[i][j] = matrizA[i][j] + matrizB[i][j]
+                    j++ // Avança para a próxima coluna
+                } while (j < colunas)
+
+                i++ // Avança para a próxima linha
+            } while (i < linhas)
+
+
+            /*-----------------------------------------------------------------
+
+            ATENÇÃO: exemplo usando o "for" para comparação
+
             // Pecorre as linhas da matriz "somaMatrizes"
             for (let i = 0; i < linhas; i++) {
                 somaMatrizes[i] = [] // Cria uma linha vazia dentro da matriz
@@ -111,6 +141,9 @@ function adicionarValor() {
                     somaMatrizes[i][j] = matrizA[i][j] + matrizB[i][j]
                 }
             }
+
+            -----------------------------------------------------------------*/
+
 
             // Esconde os elementos da segunda tela
             tela2.forEach(parteDaTela2 => {
@@ -147,7 +180,6 @@ function novaSoma() {
     tela1.forEach(parteDaTela1 => {
         parteDaTela1.style.display = 'inline-block'
     })
-
 
     // Esconde os elementos da segunda tela
     tela2.forEach(parteDaTela2 => {
