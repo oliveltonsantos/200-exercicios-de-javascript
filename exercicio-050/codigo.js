@@ -1,17 +1,17 @@
- /* Descrição do exercício:
+/* Descrição do exercício:
 
- Escreva uma função que aceite uma string como argumento e retorne a string invertida. 
+Escreva uma função que aceite uma string como argumento e retorne a string invertida. 
  
- Descrição: Neste exercício, você precisa escrever uma função que receba uma string como argumento e retorne a string com seus caracteres na ordem inversa.
+Descrição: Neste exercício, você precisa escrever uma função que receba uma string como argumento e retorne a string com seus caracteres na ordem inversa.
 
- */
+*/
 
- const inputTexto = document.getElementById('texto')
- const btnPassarTexto = document.querySelector('button.btnPassarTexto')
- const btnNovoTexto = document.querySelector('button.btnNovoTexto')
- const resposta = document.querySelector('div.resposta')
+const inputTexto = document.getElementById('texto')
+const btnPassarTexto = document.querySelector('button.btnPassarTexto')
+const btnNovoTexto = document.querySelector('button.btnNovoTexto')
+const resposta = document.querySelector('div.resposta')
 
- function passarTexto() {
+function passarTexto() {
     if (inputTexto.value.trim() === '') {
         alert('Digite uma palavra ou frase para continuar.')
         inputTexto.focus()
@@ -22,23 +22,34 @@
 
     inverterTexto(texto)
 
- }
+}
 
 
- function inverterTexto(textoPassado) {
+function inverterTexto(textoPassado) {
+    let textoInvertido = ''
 
-
-    for (let i = 0; i < textoPassado.lenght; i++) {
-        let textoInvertido = textoPassado[i] - 1
-       
+    for (let i = textoPassado.length - 1; i >= 0; i--) {
+        textoInvertido += textoPassado[i]
     }
 
-     resposta.innerHTML = `Teste: ${textoInvertido}`
+    resposta.innerHTML = `<p>Inversão: ${textoPassado} > ${textoInvertido}<p>`
 
-    
+    inputTexto.disabled = true
+
+    btnPassarTexto.style.display = 'none'
+    btnNovoTexto.style.display = 'inline-block'
+}
 
 
+function novoTexto() {
+    inputTexto.disabled = false
+    inputTexto.value = ''
+    inputTexto.focus()
+
+    btnPassarTexto.style.display = 'inline-block'
+    btnNovoTexto.style.display = 'none'
+
+    resposta.innerHTML = ''
+}
 
 
-
- }
