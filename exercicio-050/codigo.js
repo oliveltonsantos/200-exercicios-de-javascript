@@ -28,6 +28,7 @@ function passarTexto() {
 function inverterTexto(textoPassado) {
     let textoInvertido = ''
 
+    // O "i = textoPassado.length - 1" serve para iniciar no último índice do texto
     for (let i = textoPassado.length - 1; i >= 0; i--) {
         textoInvertido += textoPassado[i]
     }
