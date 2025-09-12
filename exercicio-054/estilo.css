@@ -57,3 +57,6 @@ button {
     margin: 10px;
 }
 
+.btnNovosNumeros {
+    display: none;
+}
