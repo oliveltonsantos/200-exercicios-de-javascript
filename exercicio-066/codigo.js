@@ -38,7 +38,7 @@ function filtroMaioresDeIdade(listaIdadesPassadas, callbackVerificacaoIdades) {
     let listaMaioresDeIdade = []
 
     for (let i = 0; i < listaIdadesPassadas.length; i++) {
-        // Se a callback "verificacaoIdades" retornar true (igual ou maior 18 anos ), adiciona a idade no array "listaMaioresDeIdade"
+        // Se o callback "verificacaoIdades" retornar true (igual ou maior 18 anos), adiciona a idade no array "listaMaioresDeIdade"
         if (callbackVerificacaoIdades(listaIdadesPassadas[i])) {
             listaMaioresDeIdade.push(listaIdadesPassadas[i])
         }
@@ -65,10 +65,31 @@ function chamarCallback() {
     let maioresDeIdade = filtroMaioresDeIdade(listaIdades, verificacaoIdades)
 
     resposta.innerHTML += `<p>Maiores de idade: ${maioresDeIdade.join(' > ')}</p>`
+
+    inputIdade.disabled = true
+
+    btnAdicionarIdade.style.display = 'none'
+    btnChamarCallback.style.display = 'none'
+    btnNovaVerificacao.style.display = 'inline-block'
+}
+
+
+function novaVerificacao() {
+    inputIdade.disabled = false
+    inputIdade.value = ''
+    inputIdade.focus()
+
+    btnAdicionarIdade.style.display = 'inline-block'
+    btnChamarCallback.style.display = 'inline-block'
+    btnNovaVerificacao.style.display = 'none'
+
+    listaIdades.length = 0
+
+    resposta.innerHTML = ''
 }
 
 
 // Eventos dos botões (em vez de colocar "onclick" direto no HTML)
 btnAdicionarIdade.addEventListener('click', adicionarIdades)
 btnChamarCallback.addEventListener('click', chamarCallback)
-
+btnNovaVerificacao.addEventListener('click', novaVerificacao)
