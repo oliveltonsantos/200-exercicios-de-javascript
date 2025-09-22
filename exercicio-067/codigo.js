@@ -64,9 +64,27 @@ function chamarCallback() {
         <p>Lista A: ${resultado[0].join(' > ')}</p>
         <p>Lista B: ${resultado[1].join(' > ')}</p>
     `
+
+    btnChamarCallback.style.display = 'none'
+    btnNovaAnalise.style.display = 'inline-block'
+}
+
+
+function novaAnalise() {
+    inputNumero.disabled = false
+    inputNumero.value = ''
+    inputNumero.focus()
+
+    btnAdicionarNumero.style.display = 'inline-block'
+    btnNovaAnalise.style.display = 'none'
+
+    conjuntoDeArrays = [[], []]
+
+    resposta.innerHTML = ''
 }
 
 
 // Eventos dos botões (em vez de colocar "onclick" direto no HTML)
 btnAdicionarNumero.addEventListener('click', adicionarNumero)
 btnChamarCallback.addEventListener('click', chamarCallback)
+btnNovaAnalise.addEventListener('click', novaAnalise)
