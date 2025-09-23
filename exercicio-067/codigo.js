@@ -27,19 +27,24 @@ function adicionarNumero() {
         conjuntoDeArrays[0].push(numero)
     } else if (conjuntoDeArrays[1].length < 5) {
         conjuntoDeArrays[1].push(numero)
-    } else {
+    }
+
+    resposta.innerHTML = `
+        <p>Lista A: ${conjuntoDeArrays[0].join(' > ')}</p>
+        <p>Lista B: ${conjuntoDeArrays[1].join(' > ')}</p>
+   `
+    inputNumero.value = ''
+    inputNumero.focus()
+
+    if (
+        conjuntoDeArrays[0].length === 5 &&
+        conjuntoDeArrays[1].length === 5
+    ) {
         alert('As duas listas estão preenchidas. Clique em "Analisar"')
         inputNumero.disabled = true
         btnAdicionarNumero.style.display = 'none'
         btnChamarCallback.style.display = 'inline-block'
     }
-
-    resposta.innerHTML = `
-    <p>Lista A: ${conjuntoDeArrays[0].join(' > ')}</p>
-    <p>Lista B: ${conjuntoDeArrays[1].join(' > ')}</p>
-   `
-    inputNumero.value = ''
-    inputNumero.focus()
 }
 
 
@@ -49,7 +54,7 @@ function aplicarCallbackEmArrays(conjuntoDeArraysPassado, callbackFiltrarPares) 
 }
 
 
-// Função de callback (filtra os números pares)
+// Função de callback (filtra os números pares de cada subarray)
 function filtrarPares(array) {
     return array.filter(numero => numero % 2 === 0)
 }
