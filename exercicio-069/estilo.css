@@ -57,3 +57,7 @@ button {
     margin: 10px;
 }
 
+.btnNovaMensagem {
+    display: none;
+}
+

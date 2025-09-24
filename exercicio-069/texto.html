@@ -11,11 +11,22 @@
 <body>
     <section class="design-section">
 
-        <h1></h1>
-        
+        <h1>Repetidor de mensagem</h1>
+
+        <p>Mensagem: <input type="text" name="mensagem" id="mensagem"></p>
+
+        <p>Número de repetições: <input type="number" name="repeticao" id="repeticao"></p>
+
+        <button onclick="chamarCallback()" class="btnGerarMensagem">Gerar mensagem</button>
+
+        <button onclick="novaMensagem()" class="btnNovaMensagem">Nova mensagem</button>
+
+        <div class="resposta"></div>
+
     </section>
 
     <script src="./codigo.js"></script>
 
 </body>
+
 </html>
