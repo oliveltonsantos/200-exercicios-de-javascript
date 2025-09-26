@@ -1,10 +1,10 @@
- /* Descrição do exercício:
+/* Descrição do exercício:
 
 Escreva uma função de alta ordem que aceite um array de funções de callback e um valor, e retorne um array de resultados de aplicar cada função de callback ao valor. 
 
 Descrição: Neste exercício, você deve criar uma função de alta ordem que receba um array de funções de callback e um valor como argumentos, e retorne um array que contenha os resultados de aplicar cada função de callback ao valor.
 
- */
+*/
 
 const inputTexto = document.getElementById('texto')
 const btnTransformar = document.querySelector('button.btnTransformar')
@@ -27,6 +27,11 @@ function transformarTexto() {
     })
 
     resposta.innerHTML = `<p>${resultado}</p>`
+
+    inputTexto.disabled = true
+
+    btnTransformar.style.display = 'none'
+    btnNovoTexto.style.display = 'inline-block'
 }
 
 
@@ -45,6 +50,17 @@ function textoInvertido(textoPassado) {
 
 function textoSemEspacos(textoPassado) {
     // Essa função varre a string e remove todos os espaços em branco ("/\s+/g" é uma expressão regular), deixando o texto colado.
-    return textoPassado.replace(/\s+/g, '') 
+    return textoPassado.replace(/\s+/g, '')
 }
 
+
+function novoTexto() {
+    inputTexto.disabled = false
+    inputTexto.value = ''
+    inputTexto.focus()
+
+    btnTransformar.style.display = 'inline-block'
+    btnNovoTexto.style.display = 'none'
+
+    resposta.innerHTML = ''
+}
