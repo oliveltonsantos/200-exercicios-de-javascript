@@ -1,5 +1,11 @@
-let conjuntoDeArrays = [[1,2,3],[4,5,6]]
+function buscarDados() {
+    return new Promise(resolve => {
+        setTimeout(() => resolve("Dados recebidos do servidor"), 2000);
+    });
+}
 
-conjuntoDeArrays.length = 0
+console.log("Início");
 
-console.log(conjuntoDeArrays) // []
+buscarDados().then(res => console.log(res));
+
+console.log("Fim");

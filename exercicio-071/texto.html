@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício de logica de programação</title>
+    <link rel="stylesheet" href="estilo.css">
+</head>
+
+<body>
+    <section class="design-section">
+
+        <h1>Mensagem cronometrada</h1>
+
+        <p>Digite sua mensagem e por quanto tempo deseja que fique visível.</p>
+
+        <p>Mensagem: <input type="text" name="mensagem" id="mensagem"></p>
+
+        <p>Tempo: <input type="number" name="tempo" id="tempo"> segundos</p>
+
+        <button onclick="chamarCallback()" class="btnGerarMensagem">Gerar mensagem</button>
+
+        <button onclick="novaMensagem()" class="btnNovaMensagem">Nova mensagem</button>
+
+        <div class="resposta"></div>
+        
+    </section>
+
+    <script src="./codigo.js"></script>
+
+</body>
+</html>
