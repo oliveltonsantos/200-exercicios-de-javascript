@@ -1,10 +1,10 @@
- /* Descrição do exercício:
+/* Descrição do exercício:
 
 Escreva uma função que aceite uma função de callback e um número, e execute a função de callback após um certo número de milissegundos especificados pelo número. 
 
 Descrição: Neste exercício, você deve criar uma função de alta ordem que receba uma função de callback e um número como argumentos, e execute a função de callback após um certo número de milissegundos especificado pelo número. Isso é conhecido como programação assíncrona.
 
- */
+*/
 
 const inputMensagem = document.getElementById('mensagem')
 const inputTempo = document.getElementById('tempo')
@@ -26,8 +26,9 @@ function chamarCallback() {
     }
 
     const mensagem = inputMensagem.value
-    const tempoDigitado = Number(inputTempo.value) 
-    const tempoEmSegunddos = tempoDigitado * 1000
+
+    const tempoDigitado = Number(inputTempo.value)
+    const tempoMilissegundos = tempoDigitado * 1000 // Conversão para milissegundos (1000 milissegundos = 1 segundo)
 
     if (tempo <= 0) {
         alert('Digite um tempo maior que zero para continuar.')
@@ -36,33 +37,48 @@ function chamarCallback() {
         return
     }
 
-    executarCallback(tempoEmSegunddos, mensagem)
-
+    executarCallback(tempoDigitado, tempoMilissegundos, mensagem)
 }
 
 
 // Função de alta ordem
-
-function executarCallback(tempoPassado, mensagemPassada) {
+function executarCallback(tempoInput, tempoConvertido, mensagemPassada) {
 
     setTimeout(() => {
-        gerarMensagem(tempoPassado, mensagemPassada)
-    }, tempoPassado)
-
-
+        gerarMensagem(tempoInput, tempoConvertido, mensagemPassada)
+    }, tempoConvertido)
 }
 
 
 // Função de callback
-
-function gerarMensagem(tempo, texto) {
+function gerarMensagem(tempoExibicao, tempoContagem, texto) {
     resposta.innerHTML = `
-        <p>Essa mensagem se autodestruirá em ${tempoDigitado} segundos.</p>
+        <p>Essa mensagem se autodestruirá em ${tempoExibicao} segundos.</p>
         <p>Mensagem: ${texto}</p>
     `
 
     setTimeout(() => {
         resposta.innerHTML = '<p>Mensagem destruída!</p>'
-    }, tempo)
+
+        inputMensagem.disabled = true
+        inputTempo.disabled = true
+
+        btnGerarMensagem.style.display = 'none'
+        btnNovaMensagem.style.display = 'inline-block'
+
+    }, tempoContagem)
 }
 
+
+function novaMensagem() {
+    inputMensagem.disabled = false
+    inputTempo.disabled = false
+    inputMensagem.value = ''
+    inputTempo.value = ''
+    inputMensagem.focus()
+
+    btnGerarMensagem.style.display = 'inline-block'
+    btnNovaMensagem.style.display = 'none'
+
+    resposta.innerHTML = ''
+}

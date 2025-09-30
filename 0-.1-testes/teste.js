@@ -1,11 +1,7 @@
-function buscarDados() {
-    return new Promise(resolve => {
-        setTimeout(() => resolve("Dados recebidos do servidor"), 2000);
-    });
+function executarDepois(callback, tempo) { 
+    setTimeout(callback, tempo); 
 }
 
-console.log("Início");
+let callbaack = () => console.log( "Executado!" ); 
 
-buscarDados().then(res => console.log(res));
-
-console.log("Fim");
+executarDepois(callbaack, 2000 ); // Saída: "Executado!" após 2 segundos
