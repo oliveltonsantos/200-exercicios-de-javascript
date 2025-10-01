@@ -11,15 +11,13 @@
 <body>
     <section class="design-section">
 
-        <h1>Simulação de crescimento populacional</h1>
+        <h1>Invest+ – Evolução de um Investimento</h1>
 
-        <p>Quantidade de anos: <input type="number" name="anos" id="anos"></p>
+        <p>Investimento inicial R$: <input type="number" name="valor" id="valor"></p>
 
-        <p>Número de habitantes: <input type="number" name="habitantes" id="habitantes"></p>
+        <button onclick="chamarCallback()" class="btnChamarCallback">Calcular</button>
 
-        <button onclick="chamarCallback()" class="btnCallback">Simular</button>
-
-        <button onclick="novaSimulacao()" class="btnNovaSimulacao">Nova simulação</button>
+        <button onclick="novoCalculo()" class="btnNovoCalculo">Novo cálculo</button>
 
         <div class="resposta"></div>
 
@@ -28,5 +26,4 @@
     <script src="./codigo.js"></script>
 
 </body>
-
 </html>
