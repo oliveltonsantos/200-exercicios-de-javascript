@@ -33,23 +33,33 @@ function chamarCallback() {
 
 
 // Função de alta ordem
-function executarCallbacks(investimentoInicial, arrayCallbacks) {
+function executarCallbacks(investimentoInicial, arrayCallbacks, intervalo = 2000) {
+    let resultado = investimentoInicial
+    let i = 0
 
-    let resultadoDoInvestimento = investimentoInicial
+    resposta.innerHTML = `<p>Valor inicial: R$${resultado.toFixed(2)}</p>`
 
-    setTimeout(() => {
-        arrayCallbacks.forEach(callback => {
-            resultadoDoInvestimento = callback(resultadoDoInvestimento)
-        })
+    // Intervalo para aplicar as funções uma por uma
+    let intervaloId = setInterval(() => {
+        if (i < arrayCallbacks.length) {
+            const callback = arrayDeCallbacks[i]
+            resultado = callback(resultado)
 
-        resposta.innerHTML = `<p>Valor final do investimento: R$${resultadoDoInvestimento.toFixed(2)}</p>`
+            // "callback.name" retorna uma string com o nome da função que foi passada como callback
+            resposta.innerHTML += `<p>Após ${callback.name}: R$${resultado.toFixed(2)}</p>`
 
-        inputValor.disabled = true
+            i++
+        } else {
+            // Quando chegar no final do array de callbacks, para o intervalo
+            clearInterval(intervaloId)
 
-        btnChamarCallback.style.display = 'none'
-        btnNovoCalculo.style.display = 'inline-block'
+            resposta.innerHTML += `<p><strong>Valor final: R$${resultado.toFixed(2)}</strong></p>`
 
-    }, 2000)
+            inputValor.disabled = true
+            btnChamarCallback.style.display = 'none'
+            btnNovoCalculo.style.display = 'inline-block'
+        }
+    }, intervalo)
 }
 
 
