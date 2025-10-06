@@ -8,7 +8,8 @@ Descrição: Neste exercício, você deve criar uma função de alta ordem que r
 
 const inputTemperatura = document.getElementById('valorCelsius')
 const btnAdicionarTemperatura = document.querySelector('button.btnAdicionarTemperatura')
-const btnChamarCallback = document.querySelector('button.btnChamarCallback')
+const btnIniciarConversao = document.querySelector('button.btnIniciarConversao')
+const btnNovaConversao = document.querySelector('button.btnNovaConversao')
 const resposta = document.querySelector('div.resposta')
 
 let listaTemperaturas = []
@@ -23,38 +24,55 @@ function adicionarTemperatura() {
     const temperaturaCelsius = inputTemperatura.value
 
     listaTemperaturas.push(temperaturaCelsius)
-
     resposta.innerHTML = `<p>Temperaturas adicionadas: ${listaTemperaturas.join(' > ')}</p>`
 
+    inputTemperatura.value = ''
+    inputTemperatura.focus()
 }
 
 
-function chamarCallback() {
+function iniciarConversao() {
     if (listaTemperaturas.length <= 0) {
         alert('Adicione temperaturas à lista para converter.')
         inputTemperatura.focus()
         return
     }
 
-    executarCallback(listaTemperaturas)
+    // Chama função de alta ordem
+    let listaConvertida = executarCallback(listaTemperaturas, converterTemperaturaFahrenheit)
+
+    resposta.innerHTML += `<p>Temperaturas convertidas: ${listaConvertida.join(' > ')}</p>`
+
+    inputTemperatura.disabled = true
+
+    btnAdicionarTemperatura.style.display = 'none'
+    btnIniciarConversao.style.display = 'none'
+    btnNovaConversao.style.display = 'inline-block'
 }
 
 
 // Função de alta ordem
-function executarCallback(listaTemperaturasPassada) {
-    converterTemperaturaFahrenheit(listaTemperaturasPassada)
+function executarCallback(listaTemperaturasPassada, callback) {
+    return callback(listaTemperaturasPassada)
 }
 
 
-// Função de callback
+// Função de callback pura
 function converterTemperaturaFahrenheit(listaParaConverter) {
-    let listaConvertida = []
+    return listaParaConverter.map(cadaTemperatura => (cadaTemperatura * 1.8) + 32)
+}
 
-    for (let i = 0; i < listaParaConverter.length; i++) {
-        let novaTemperatura = (listaParaConverter[i] * 1.8) + 32
-        listaConvertida.push(novaTemperatura)
-    }
 
-    resposta.innerHTML += `<p>Temperaturas convertidas: ${listaConvertida.join(' > ')}</p>`
+function novaConversao() {
+    listaTemperaturas.length = 0
 
+    inputTemperatura.disabled = false
+    inputTemperatura.value = ''
+    inputTemperatura.focus()
+
+    btnAdicionarTemperatura.style.display = 'inline-block'
+    btnIniciarConversao.style.display = 'inline-block'
+    btnNovaConversao.style.display = 'none'
+
+    resposta.innerHTML = ''
 }
