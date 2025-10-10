@@ -1,17 +1,13 @@
-function aplicarCallbacksComIntervalo(n, callback, valorInicial) {
-  let valor = valorInicial;
-  let i = 0;
-  let intervalId = setInterval(() => {
-    if (i < callback.length) {
-      valor = callback[i](valor);
-      i++;
-    } else {
-      clearInterval(intervalId);
-      console.log(valor);
+let amigo = {
+    nome: 'José',
+    sexo: 'M',
+    peso: 85.4,
+    engordar(p = 0) {
+        console.log('Engordou')
+        // É uma palavra que faz autorreferência ao objeto
+        this.peso += p
     }
-  }, n);
 }
 
-let callback = [num => num * 2, num => num + 1];
-let valorInicial = 1;
-aplicarCallbacksComIntervalo(2000, callback, valorInicial); // Saída: valor final impresso no console ao final das execuções
+amigo.engordar(2)
+console.log(`${amigo.nome} pesa ${amigo.peso}KG.`)
