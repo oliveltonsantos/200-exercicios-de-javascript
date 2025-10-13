@@ -13,6 +13,7 @@ const btnAdicionarProduto = document.querySelector('button.btnAdicionarProduto')
 const btnNovoProduto = document.querySelector('button.btnNovoProduto')
 const resposta = document.querySelector('div.resposta')
 
+
 function adicionarProduto() {
     if (inputNomeProduto.value === '') {
         alert('Digite o nome do produto para adicionar.')
