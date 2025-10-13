@@ -20,20 +20,23 @@
         <p>
             Está em estoque?
 
-            <input type="radio" name="estoque" id="sim" value="true"> 
+            <input type="radio" name="estoque" id="sim" value="true">
             <label for="sim">Sim</label>
 
-            <input type="radio" name="estoque" id="nao" value="false"> 
+            <input type="radio" name="estoque" id="nao" value="false">
             <label for="nao">Não</label>
         </p>
 
         <button onclick="adicionarProduto()" class="btnAdicionarProduto">Adicionar produto</button>
 
-        <button onclick="AdicionarNovoProduto()" class="btnNovoProduto">Adicionar novo produto</button>
-            
+        <div class="resposta"></div>
+
+        <button onclick="adicionarNovoProduto()" class="btnNovoProduto">Adicionar novo produto</button>
+
     </section>
 
     <script src="./codigo.js"></script>
 
 </body>
+
 </html>
