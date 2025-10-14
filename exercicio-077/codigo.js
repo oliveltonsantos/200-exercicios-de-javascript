@@ -30,6 +30,13 @@ function adicionarLivro() {
     const autor = inputAutor.value
     const paginas = Number(inputPaginas.value)
 
+    if (paginas <= 0) {
+        alert('Adicione uma quantidade de páginas maior que zero.')
+        inputPaginas.value = ''
+        inputPaginas.focus()
+        return
+    }
+
     let dadosDoLivro = {
         nome: nome,
         autor: autor,
