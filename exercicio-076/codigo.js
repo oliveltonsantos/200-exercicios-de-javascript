@@ -15,7 +15,7 @@ const resposta = document.querySelector('div.resposta')
 
 
 function adicionarProduto() {
-    if (inputNomeProduto.value === '') {
+    if (inputNomeProduto.value.trim() === '') {
         alert('Digite o nome do produto para adicionar.')
         inputNomeProduto.focus()
         return
