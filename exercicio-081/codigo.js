@@ -22,10 +22,10 @@ function realizarOperacao() {
     const deposito = Number(inputDeposito.value)
     const saque = Number(inputSaque.value)
 
-    // Pecorre todos os campos do formulário
+
+    // Verifica se todos os campos estão preenchidos
     for (const input of inputsDados) {
 
-        // Verifica se existe algum campo não preenchido
         if (input.value === '') {
             alert('Preencha todos os campos para realizar a operação.')
             input.focus()
@@ -33,7 +33,6 @@ function realizarOperacao() {
         }
 
         const valor = Number(input.value)
-
         if (valor < 0) {
             alert('Não são aceitos valores negativos.')
             input.value = ''
@@ -42,7 +41,8 @@ function realizarOperacao() {
         }
     }
 
-    // Objeto
+
+    // Objeto da conta
     let contaBancaria = {
         nome: nome,
         saldo: saldo,
@@ -63,24 +63,46 @@ function realizarOperacao() {
         }
     }
 
-    // Chama as funções de deposito e saque
+
+    // Aplica o depósito
     contaBancaria.fazerDeposito()
+
+
+    // Validação antes de sacar
+    if (contaBancaria.saque > contaBancaria.saldo) {
+        alert('Saldo insuficiente para realizar o saque. Digite outro valor.')
+        inputSaque.value = ''
+        inputSaque.focus()
+        return
+    }
+
+
+    // Apenas faz o saque se o valor for válido
     contaBancaria.fazerSaque()
+
 
     resposta.innerHTML = `
         <p><strong>RESUMO DA OPERAÇÃO</strong></p>
         <p>Senhor(a), ${contaBancaria.nome} atualmente na sua conta consta:</p>
         <p>----------------------------------------------------------------</p>
-        <p>Depósito: R$${contaBancaria.deposito.toFixed(2)}</p>
-        <p>Saque: R$${contaBancaria.saque.toFixed(2)}</p>
+        <p>Depósito: ${contaBancaria.deposito > 0
+            ? `R$${contaBancaria.deposito.toFixed(2)}`
+            : 'Nenhum depósito foi feito.'
+        }</p>
+        <p>Saque: ${contaBancaria.saque > 0
+            ? `R$${contaBancaria.saque.toFixed(2)}`
+            : 'Nenhum saque foi realizado.'
+        }</p>
         <p>----------------------------------------------------------------</p>
         <p><strong>Saldo atual: R$${contaBancaria.saldoAtual().toFixed(2)}</strong></p>
     `
+
 
     inputNome.disabled = true
     inputSaldo.disabled = true
     inputDeposito.disabled = true
     inputSaque.disabled = true
+
 
     btnRealizarOperacao.style.display = 'none'
     btnNovaOperacao.style.display = 'inline-block'
