@@ -6,13 +6,12 @@ Descrição: Você deve criar uma função que aceite dois arrays como argumento
 
 */
 
-const inputPar = document.getElementById('par')
-const inputImpar = document.getElementById('impar')
-const parDesaparece = document.querySelector('p.parDesaparece')
-const imparAparece = document.querySelector('p.imparAparece')
+const inputNumero = document.getElementById('numero')
 const btnAdicionar = document.querySelector('button.btnAdicionar')
 const btnFiltrar = document.querySelector('button.btnFiltrar')
+const btnNovoFiltro = document.querySelector('button.btnNovoFiltro')
 const resposta = document.querySelector('div.resposta')
+
 
 let listaPares = []
 let listaImpares = []
@@ -20,42 +19,85 @@ let listaImpares = []
 
 function adicionarNumero() {
 
-    const par = Number(inputPar.value)
-    const impar = Number(inputImpar.value)
+    const numero = Number(inputNumero.value)
 
-
-    if (inputPar.value === '') {
-        alert('Digite um número par para adicionar.')
-        inputPar.focus()
+    if (inputNumero.value === '') {
+        alert('Digite um número.')
+        inputNumero.focus()
         return
     }
 
 
-
-    if (listaPares.length < 5) {
-        listaPares.push(par)
-        resposta.innerHTML = `<p>Pares adicionados: ${listaPares.join(' > ')}<p>`
+    // Verifica se é par ou ímpar
+    if (numero % 2 === 0) {
+        if (listaPares.length < 5) {
+            listaPares.push(numero)
+            resposta.innerHTML = `<p>Pares: ${listaPares.join(' > ')}</p>`
+        } else {
+            alert('Você já adicionou 5 números pares! Agora adicione os ímpares.')
+        }
     } else {
-        alert('Agora adicione 5 números ímpares.')
-        parDesaparece.style.display = 'none'
-        imparAparece.style.display = 'inline-block'
-        inputImpar.focus()
-        resposta.innerHTML = ''
-
         if (listaImpares.length < 5) {
-            listaImpares.push(impar)
-            resposta.innerHTML = `<p>Pares adicionados: ${listaImpares.join(' > ')}<p>`
+            listaImpares.push(numero)
+            resposta.innerHTML = `<p>Ímpares: ${listaImpares.join(' > ')}</p>`
+        } else {
+            alert('Você já adicionou 5 números ímpares.')
         }
     }
 
 
+    // Quando os arrays estiverem completos
+    if (listaPares.length === 5 && listaImpares.length === 5) {
+        resposta.innerHTML = `
+            <p>Todos os números foram adicionados.</p>
+            <p>Clique em <strong>"Filtrar múltiplos de 5"</strong>.</p>
+        `
+
+        inputNumero.disabled = true
+
+        btnAdicionar.style.display = 'none'
+        btnFiltrar.style.display = 'inline-block'
+    }
+
+
+    // Limpa o input
+    inputNumero.value = ''
+    inputNumero.focus()
+
 }
 
 
+function filtrarMultiplos5() {
+    // Mêtodo "spread" cria um novo array combinando os dois arrays
+    const arraysCombinados = [...listaPares, ...listaImpares]
 
+    // O "filter()" percorre cada número do novo array e aplica a função de teste (múltiplos de 5)
+    const numerosMultiplos5 = arraysCombinados.filter(cadaNumero => cadaNumero % 5 === 0)
+
+    resposta.innerHTML = `<p><strong>Múltiplos de 5: ${numerosMultiplos5.join(' > ')}</strong></p>`
+
+    btnFiltrar.style.display = 'none'
+    btnNovoFiltro.style.display = 'inline-block'
+}
+
+
+function novoFiltro() {
+
+    listaPares.length = 0
+    listaImpares.length = 0
+
+    inputNumero.disabled = false
+    inputNumero.value = ''
+    inputNumero.focus()
+
+    btnNovoFiltro.style.display = 'none'
+    btnAdicionar.style.display = 'inline-block'
+
+    resposta.innerHTML = ''
+}
 
 
 // Eventos
 btnAdicionar.addEventListener('click', adicionarNumero)
-//btnFiltrar.addEventListener('click', filtrarMultiplos5)
-
+btnFiltrar.addEventListener('click', filtrarMultiplos5)
+btnNovoFiltro.addEventListener('click', novoFiltro)
